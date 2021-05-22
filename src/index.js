@@ -1,3 +1,5 @@
-var a = 'b'
+function fetchImages() {
+	console.log('fetch images here')
+}
 
-console.log(a)
+fetchImages()
