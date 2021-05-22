@@ -1,1 +1,3 @@
-var a = "b"
+var a = 'b'
+
+console.log(a)

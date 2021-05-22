@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "lint:fix": "eslint src/*.js --fix",
-    "lint": "eslint src/*.js"
+    "lint": "eslint src/*.js",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/camillaeriksson/Flickr-Image-Gallery#readme",
   "devDependencies": {
-    "eslint": "^7.27.0"
+    "eslint": "^7.27.0",
+    "husky": "^6.0.0"
   }
 }
