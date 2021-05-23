@@ -15,8 +15,9 @@ function fetchImages() {
 
 function printImages(data) {
 	data.map((image) => {
+		console.log(image)
 		const imageUrl = `https://live.staticflickr.com/${image.server}/${image.id}_${image.secret}.jpg`
-		document.querySelector('#image-container').insertAdjacentHTML('afterbegin', `<img src="${imageUrl}" alt="Girl in a jacket" width="500" height="600">`)
+		document.querySelector('#image-container').insertAdjacentHTML('afterbegin', `<img src="${imageUrl}" alt="${image.title}" width="500" height="600">`)
 	})
 }
 
