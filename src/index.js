@@ -15,7 +15,6 @@ function fetchImages() {
 
 function printImages(data) {
 	data.map((image) => {
-		console.log(image)
 		const imageUrl = `https://live.staticflickr.com/${image.server}/${image.id}_${image.secret}.jpg`
 		document.querySelector('#image-container').insertAdjacentHTML('afterbegin', `<img src="${imageUrl}" alt="${image.title}" width="500" height="600">`)
 	})
@@ -24,12 +23,12 @@ function printImages(data) {
 function displayLoader(isLoading) {
 	console.log(isLoading)
 	if (isLoading === true) {
-		document.querySelector('#image-container').innerHTML = '<div id="loader">LOADING</div>'
+		document.querySelector('#image-container').innerHTML = '<div id="loader"></div> <p id="loading-text">Loading images...</p>'
 	} else if (isLoading === false) {
 		document.querySelector('#loader').remove()
 	}
 }
 
 function handleErrors() {
-	document.querySelector('#image-container').innerHTML = '<div id="loader">Sorry, could not load images.</div>'
+	document.querySelector('#image-container').innerHTML = '<div id="error-message">Sorry, could not load images.</div>'
 }

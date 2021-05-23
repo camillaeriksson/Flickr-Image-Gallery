@@ -1,0 +1,43 @@
+body {
+	font-family: 'Poppins', sans-serif;
+}
+
+#error-message {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#loader {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#loading-text {
+	width: 100%;
+	text-align: center;
+}
+
+#loader::before {
+	border: solid 5px #eee;
+	border-bottom-color: #F70084;
+	border-top-color: #0060D9;
+	border-radius: 50%;
+	content: "";
+	height: 40px;
+	width: 40px;
+	animation: 2s linear infinite loader;
+}
+
+@keyframes loader {
+	from {
+		transform:rotate(0deg);
+	}
+	to {
+		transform:rotate(360deg);
+	}
+}
+
