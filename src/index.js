@@ -20,7 +20,7 @@ window.addEventListener('scroll', () => {
 function fetchImages() {
 	isLoading = true
 	displayLoader(isLoading)
-	fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=97a2010d6449784728e75b5b59424c57&tags=nature&per_page=5&page=${currentPage}&format=json&nojsoncallback=1`)
+	fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=97a2010d6449784728e75b5b59424c57&tags=nature&per_page=9&page=${currentPage}&format=json&nojsoncallback=1`)
 		.then(response => response.json())
 		.then (data => printImages(data.photos.photo))
 		.then(() => {
@@ -38,7 +38,7 @@ function fetchImages() {
 function printImages(data) {
 	data.map((image) => {
 		const imageUrl = `https://live.staticflickr.com/${image.server}/${image.id}_${image.secret}.jpg`
-		const imageElement = `<img src="${imageUrl}" alt="${image.title}" width="500" height="600">`
+		const imageElement = `<img src="${imageUrl}" alt="${image.title}">`
 		document.querySelector('#image-container').insertAdjacentHTML('beforeend', imageElement)
 	})
 }
