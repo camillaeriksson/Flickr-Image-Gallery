@@ -1,13 +1,35 @@
+let currentPage = 1
+let isLoading = true
+
 window.onload = fetchImages()
 
+window.addEventListener('scroll', () => {
+	const {
+		scrollTop,
+		scrollHeight,
+		clientHeight
+	} = document.documentElement
+
+	if (scrollTop + clientHeight >= scrollHeight - 5 &&
+	!isLoading) {
+		currentPage++
+		fetchImages()
+	}
+})
+
 function fetchImages() {
-	displayLoader(true)
-	fetch('https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=97a2010d6449784728e75b5b59424c57&tags=nature&format=json&nojsoncallback=1')
+	isLoading = true
+	displayLoader(isLoading)
+	fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=97a2010d6449784728e75b5b59424c57&tags=nature&per_page=5&page=${currentPage}&format=json&nojsoncallback=1`)
 		.then(response => response.json())
 		.then (data => printImages(data.photos.photo))
-		.then(() => displayLoader(false))
+		.then(() => {
+			isLoading = false
+			displayLoader(isLoading)
+		})
 		.catch(error => {
-			displayLoader(false)
+			isLoading = false
+			displayLoader(isLoading)
 			handleErrors()
 			console.log(error)
 		})
@@ -16,16 +38,18 @@ function fetchImages() {
 function printImages(data) {
 	data.map((image) => {
 		const imageUrl = `https://live.staticflickr.com/${image.server}/${image.id}_${image.secret}.jpg`
-		document.querySelector('#image-container').insertAdjacentHTML('afterbegin', `<img src="${imageUrl}" alt="${image.title}" width="500" height="600">`)
+		const imageElement = `<img src="${imageUrl}" alt="${image.title}" width="500" height="600">`
+		document.querySelector('#image-container').insertAdjacentHTML('beforeend', imageElement)
 	})
 }
 
 function displayLoader(isLoading) {
 	console.log(isLoading)
 	if (isLoading === true) {
-		document.querySelector('#image-container').innerHTML = '<div id="loader"></div> <p id="loading-text">Loading images...</p>'
+		document.querySelector('#image-container').insertAdjacentHTML('beforeend', '<div id="loader"></div> <p id="loading-text">Loading images...</p>')
 	} else if (isLoading === false) {
 		document.querySelector('#loader').remove()
+		document.querySelector('#loading-text').remove()
 	}
 }
 
