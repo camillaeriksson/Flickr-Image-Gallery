@@ -7,8 +7,11 @@ function fetchImages() {
 		})
 }
 
-function printImages() {
-	document.querySelector('#image-container').insertAdjacentHTML('afterbegin', '<h1>Hello World</h1>')
+function printImages(data) {
+	data.map((image) => {
+		const imageUrl = 'https://live.staticflickr.com/'+image.server+'/'+image.id+'_'+image.secret+'.jpg'
+		document.querySelector('#image-container').insertAdjacentHTML('afterbegin', `<img src="${imageUrl}" alt="Girl in a jacket" width="500" height="600">`)
+	})
 }
 
 
