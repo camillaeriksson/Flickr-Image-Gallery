@@ -7,6 +7,8 @@ function fetchImages() {
 		.then (data => printImages(data.photos.photo))
 		.then(() => displayLoader(false))
 		.catch(error => {
+			displayLoader(false)
+			handleErrors()
 			console.log(error)
 		})
 }
@@ -25,4 +27,8 @@ function displayLoader(isLoading) {
 	} else if (isLoading === false) {
 		document.querySelector('#loader').remove()
 	}
+}
+
+function handleErrors() {
+	document.querySelector('#image-container').innerHTML = '<div id="loader">Sorry, could not load images.</div>'
 }
