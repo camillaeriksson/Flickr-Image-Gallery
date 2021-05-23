@@ -20,7 +20,7 @@ window.addEventListener('scroll', () => {
 function fetchImages() {
 	isLoading = true
 	displayLoader(isLoading)
-	fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=97a2010d6449784728e75b5b59424c57&tags=nature&per_page=9&page=${currentPage}&format=json&nojsoncallback=1`)
+	fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&in_gallery=true&api_key=97a2010d6449784728e75b5b59424c57&tags=clouds&sort=interestingness-desc&per_page=10&page=${currentPage}&format=json&nojsoncallback=1`)
 		.then(response => response.json())
 		.then (data => printImages(data.photos.photo))
 		.then(() => {
@@ -37,16 +37,16 @@ function fetchImages() {
 
 function printImages(data) {
 	data.map((image) => {
-		const imageUrl = `https://live.staticflickr.com/${image.server}/${image.id}_${image.secret}.jpg`
-		const imageElement = `<img src="${imageUrl}" alt="${image.title}">`
-		document.querySelector('#image-container').insertAdjacentHTML('beforeend', imageElement)
+		const imageUrl = `https://live.staticflickr.com/${image.server}/${image.id}_${image.secret}_w.jpg`
+		const imageElement = `<div class="single-image-container"><img src="${imageUrl}" alt="${image.tite}" /></div>`
+		document.querySelector('#all-images-container').insertAdjacentHTML('beforeend', imageElement)
 	})
 }
 
 function displayLoader(isLoading) {
 	console.log(isLoading)
 	if (isLoading === true) {
-		document.querySelector('#image-container').insertAdjacentHTML('beforeend', '<div id="loader"></div> <p id="loading-text">Loading images...</p>')
+		document.querySelector('#all-images-container').insertAdjacentHTML('beforeend', '<div id="loader"></div> <p id="loading-text">Loading images...</p>')
 	} else if (isLoading === false) {
 		document.querySelector('#loader').remove()
 		document.querySelector('#loading-text').remove()
@@ -54,5 +54,5 @@ function displayLoader(isLoading) {
 }
 
 function handleErrors() {
-	document.querySelector('#image-container').innerHTML = '<div id="error-message">Sorry, could not load images.</div>'
+	document.querySelector('#all-images-container').innerHTML = '<div id="error-message">Sorry, could not load images.</div>'
 }
