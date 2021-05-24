@@ -6,6 +6,7 @@ body {
 	margin: 0 auto;
 	display: flex;
 	flex-wrap: wrap;
+	max-width: 1250px;
 }
 
 .single-image-container {
@@ -17,8 +18,8 @@ body {
 img {
 	width: 100%;
 	height: 100%;
- object-fit: cover;
- vertical-align: bottom;
+ 	object-fit: cover;
+ 	vertical-align: bottom;
 }
 
 #error-message {
@@ -59,5 +60,11 @@ img {
 	to {
 		transform:rotate(360deg);
 	}
+}
+
+@media (max-width: 1245px) {
+  .single-image-container {
+    height: 350px;
+  }
 }
 
