@@ -42,6 +42,32 @@ img {
 	text-align: center;
 }
 
+.image-info-overlay {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0);
+	opacity: 0;
+	color: white;
+	z-index: 100;
+	position: relative;
+	height: 60px;
+	width: 250px;
+	bottom: 120px;
+	transition: .5s ease;
+	overflow: hidden;
+	padding: 10px;
+}
+
+.image-info-overlay p, .image-info-overlay h4 {
+	margin: 0;
+}
+
+.single-image-container:hover .image-info-overlay {
+	background-color: rgba(0, 0, 0, 0.5);
+  opacity: 1;
+}
+
 #loader::before {
 	border: solid 5px #eee;
 	border-bottom-color: #F70084;
