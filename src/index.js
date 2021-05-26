@@ -1,8 +1,11 @@
 let currentPage = 1
 let isLoading = true
 
+// Fetching images from API when all elements are loaded in the dom
 window.onload = fetchImages()
 
+// Endless scroll that fetches a new set of images
+// only if isLoading is false
 window.addEventListener('scroll', () => {
 	const {
 		scrollTop,
@@ -17,6 +20,7 @@ window.addEventListener('scroll', () => {
 	}
 })
 
+// Fetching images from API and printing them to the dom
 function fetchImages() {
 	isLoading = true
 	displayLoader(isLoading)
@@ -35,6 +39,7 @@ function fetchImages() {
 		})
 }
 
+// Printing out the fetched images to the dom
 function printImages(data) {
 	data.map((image) => {
 		let imageTitle = ''
@@ -43,7 +48,6 @@ function printImages(data) {
 		} else {
 			imageTitle = 'Untitled'
 		}
-		console.log(image)
 		const imageUrl = `https://live.staticflickr.com/${image.server}/${image.id}_${image.secret}_w.jpg`
 		const imageElement = 
 		`<div class="single-image-container">
@@ -57,8 +61,9 @@ function printImages(data) {
 	})
 }
 
+// Printing out a loader to the dom if isLoading is true
+// and removing it if isLoading is false
 function displayLoader(isLoading) {
-	console.log(isLoading)
 	if (isLoading === true) {
 		document.querySelector('#all-images-container').insertAdjacentHTML('beforeend', '<div id="loader"></div> <p id="loading-text">Loading images...</p>')
 	} else if (isLoading === false) {
@@ -67,10 +72,12 @@ function displayLoader(isLoading) {
 	}
 }
 
+// Printing error message to the dom if fetch from API failed
 function handleErrors() {
 	document.querySelector('#all-images-container').innerHTML = '<div id="error-message">Sorry, could not load images.</div>'
 }
 
+// Set of test functions for Jest
 const functions = {
 	sum: (a, b) => {
 		return a + b
